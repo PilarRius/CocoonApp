@@ -1,10 +1,13 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import './App.css';
+import Signup from './pages/Signup';
 import Login from './pages/Login';
 import About from './pages/About';
 import FixYourself from './pages/FixYourself';
 import ImproveYourself from './pages/ImproveYourself';
+import UserRoutines from './pages/UserRoutines';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -30,6 +33,7 @@ const Home: React.FC = () => {
         </div>
         <nav>
           <Link to="/login">Login</Link>
+          <Link to="/signup">Sign Up</Link>
           <Link to="/about">About</Link>
         </nav>
       </header>
@@ -64,10 +68,12 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
         <Route path="/fix-yourself" element={<FixYourself />} />
         <Route path="/improve-yourself" element={<ImproveYourself />} />
+        <Route path="/user-routines" element={<UserRoutines />} />
       </Routes>
     </Router>
   );

@@ -1,14 +1,26 @@
+// filepath: /c:/Users/user/Full-Stack/CocoonApp/src/pages/Login.tsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login attempt:', { email, password });
+    // Hardcoded user credentials
+    const hardcodedUser = {
+      email: 'testuser@example.com',
+      password: 'password123'
+    };
+
+    if (email === hardcodedUser.email && password === hardcodedUser.password) {
+      console.log('Login successful');
+      navigate('/user-routines');
+    } else {
+      alert('Invalid email or password');
+    }
   };
 
   return (
@@ -26,10 +38,7 @@ const Login: React.FC = () => {
               style={{
                 width: '100%',
                 padding: '0.5rem',
-                borderRadius: '4px',
-                border: '1px solid #ccc'
               }}
-              required
             />
           </div>
           <div>
@@ -42,30 +51,14 @@ const Login: React.FC = () => {
               style={{
                 width: '100%',
                 padding: '0.5rem',
-                borderRadius: '4px',
-                border: '1px solid #ccc'
               }}
-              required
             />
           </div>
-          <button
-            type="submit"
-            style={{
-              padding: '0.75rem',
-              backgroundColor: 'var(--left-color)',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              marginTop: '1rem'
-            }}
-          >
-            Login
-          </button>
+          <button type="submit" style={{ padding: '0.5rem', background: 'var(--left-color)', color: '#fff' }}>Login</button>
         </form>
-        <Link to="/" style={{ display: 'block', marginTop: '2rem', textAlign: 'center', color: 'var(--left-color)' }}>
-          Back to Home
-        </Link>
+        <p style={{ marginTop: '1rem' }}>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
+        </p>
       </div>
     </div>
   );
