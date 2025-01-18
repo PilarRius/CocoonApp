@@ -23,9 +23,19 @@ const Home: React.FC = () => {
 
   return (
     <div className="container">
+      <header className="header">
+        <div className="logo-container">
+          <img src="/images/Cocoon.png" alt="Cocoon Logo" className="logo-img" />
+          <Link to="/" className="logo">Cocoon</Link>
+        </div>
+        <nav>
+          <Link to="/login">Login</Link>
+          <Link to="/about">About</Link>
+        </nav>
+      </header>
       <div 
-        className="split left" 
-        onMouseEnter={() => handleHover('left')} 
+        className="split left"
+        onMouseEnter={() => handleHover('left')}
         onMouseLeave={resetHover}
         onClick={() => navigate('/fix-yourself')}
       >
@@ -35,8 +45,8 @@ const Home: React.FC = () => {
         </div>
       </div>
       <div 
-        className="split right" 
-        onMouseEnter={() => handleHover('right')} 
+        className="split right"
+        onMouseEnter={() => handleHover('right')}
         onMouseLeave={resetHover}
         onClick={() => navigate('/improve-yourself')}
       >
@@ -45,13 +55,6 @@ const Home: React.FC = () => {
           <p>Achieve your goals and thrive.</p>
         </div>
       </div>
-      <header>
-        <Link to="/" className="logo">Cocoon</Link>
-        <nav>
-          <Link to="/login">Login</Link>
-          <Link to="/about">About</Link>
-        </nav>
-      </header>
     </div>
   );
 };
