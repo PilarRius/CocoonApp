@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import Category from '../models/Category.js';
 import Routine from '../models/Routine.js';
 
@@ -17,9 +18,9 @@ router.get('/', async (req, res) => {
 // Get routines by category
 router.get('/:categoryId/routines', async (req, res) => {
   try {
-    const categoryId = mongoose.Types.ObjectId(req.params.categoryId); // Ensure correct ObjectId format
-    const category = await Category.findById(categoryId).populate('routines');
-    res.json(category.routines);
+    const categoryId = new mongoose.Types.ObjectId(req.params.categoryId); // Correct usage of ObjectId
+    const routines = await Routine.find({ category_id: categoryId });
+    res.json(routines);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
