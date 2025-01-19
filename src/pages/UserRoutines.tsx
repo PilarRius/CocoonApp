@@ -1,7 +1,9 @@
-// filepath: /c:/Users/user/Full-Stack/CocoonApp/src/pages/UserRoutines.tsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const UserRoutines: React.FC = () => {
+  const navigate = useNavigate();
+
   const routines = [
     { id: 1, name: 'Morning Routine' },
     { id: 2, name: 'Workout Routine' },
@@ -17,6 +19,7 @@ const UserRoutines: React.FC = () => {
             <li key={routine.id}>{routine.name}</li>
           ))}
         </ul>
+        <button onClick={() => navigate('/')}>Back Home</button>
       </div>
     </div>
   );
