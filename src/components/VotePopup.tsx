@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Popup.css'; // Import the CSS file for styling
+import './Popup.css';
 
 interface VotePopupProps {
   routineName: string;
