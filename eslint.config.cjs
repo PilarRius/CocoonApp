@@ -17,6 +17,7 @@ module.exports = [
     },
     rules: {
       // Custom rules
+      '@typescript-eslint/no-unused-vars': ['warn', { 'varsIgnorePattern': '^_' }],
     },
     plugins: {
       react: react,
