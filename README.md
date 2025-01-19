@@ -1,50 +1,121 @@
-# React + TypeScript + Vite
+# Cocoon App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A wellness application focused on helping users establish and maintain healthy routines.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### User Features
+- Browse wellness categories
+- View routines by category
+- Add routines to personal collection
+- Set alarms for routines
+- Vote on routine effectiveness
+- Track days performing routines
+- Remove routines from collection
 
-## Expanding the ESLint configuration
+### Technical Features
+- JWT Authentication
+- MongoDB Integration
+- Local Storage Management
+- Responsive Design
+- Modal Popups
+- Real-time Updates
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tech Stack
 
-- Configure the top-level `parserOptions` property like this:
+### Frontend
+- React 18
+- TypeScript
+- Vite
+- React Router DOM
+- CSS3
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Backend
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+- JWT
+- bcryptjs
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Project Structure
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+
+
+## Installation
+
+```bash
+# Clone repository
+git clone [repository-url]
+
+# Install backend dependencies
+cd backend
+npm install
+
+# Install frontend dependencies
+cd ../frontend
+npm install
+
+
+## Environment setup
+Create .env fiel in backend directory
+
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+PORT=5000
+
+## Running the app development
+# Start backend
+cd backend
+npm run dev
+
+# Start frontend
+cd frontend
+npm run dev
+
+## Running the app production
+# Start backend
+cd backend
+npm start
+
+# Build frontend
+cd frontend
+npm run build
+
+## Data Models
+Category:
+interface Category {
+  _id: string;
+  name: string;
+  description: string;
+  routines: string[];
+}
+
+Routine:
+interface Routine {
+  _id: string;
+  name: string;
+  description: string;
+  type: string;
+  frequency: string;
+  resources: object;
+  categories: string[];
+  alarm?: {
+    time: string;
+    days: string[];
+  };
+}
+
+API Endpoints
+Categories
+GET /api/categories - Get all categories
+GET /api/categories/:categoryId/routines - Get routines by category
+Routines
+GET /api/routines - Get all routines
+POST /api/routines - Create new routine
+PUT /api/routines/:id - Update routine
+DELETE /api/routines/:id - Delete routine
+
+
+
