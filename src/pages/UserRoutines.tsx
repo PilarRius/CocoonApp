@@ -44,6 +44,12 @@ const UserRoutines: React.FC = () => {
     return Math.floor(Math.random() * 30); // Placeholder logic
   };
 
+  const handleRemoveRoutine = (routine: Routine) => {
+    const updatedRoutines = routines.filter(r => r.id !== routine.id);
+    setRoutines(updatedRoutines);
+    localStorage.setItem('userRoutines', JSON.stringify(updatedRoutines));
+  };
+
   return (
     <div className="page">
       <div className="page-content">
@@ -56,6 +62,7 @@ const UserRoutines: React.FC = () => {
               <p>Days doing this routine: {calculateDaysDoingRoutine(routine)}</p>
               <button onClick={() => handleSetAlarm(routine)}>Set Alarm</button>
               <button onClick={() => handleVoteEffectiveness(routine)}>Vote Effectiveness</button>
+              <button onClick={() => handleRemoveRoutine(routine)}>Remove</button>
             </li>
           ))}
         </ul>

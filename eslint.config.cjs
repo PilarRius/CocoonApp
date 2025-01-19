@@ -1,10 +1,9 @@
 // eslint.config.js (or eslint.config.cjs)
 const js = require('@eslint/js');
-const globals = require('globals');
 const reactHooks = require('eslint-plugin-react-hooks');
-const reactRefresh = require('eslint-plugin-react-refresh');
 const tseslint = require('@typescript-eslint/eslint-plugin');
 const react = require('eslint-plugin-react');
+const reactRefresh = require('eslint-plugin-react-refresh');
 
 /** @type {import('eslint').Linter.Config} */
 module.exports = [
