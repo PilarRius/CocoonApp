@@ -56,7 +56,8 @@ const UserRoutines: React.FC = () => {
     setShowVotePopup(false);
   };
 
-  const calculateDaysDoingRoutine = (routine: Routine) => {
+  const calculateDaysDoingRoutine = (_: Routine) => {
+     // Using underscore prefix to indicate intentionally unused parameter
     return Math.floor(Math.random() * 30);
   };
 
