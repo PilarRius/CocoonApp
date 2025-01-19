@@ -28,8 +28,18 @@ const UserRoutines: React.FC = () => {
   };
 
   const handleSaveAlarm = (time: string, days: string[]) => {
-    // Save alarm to MongoDB
-    console.log('Alarm saved for', selectedRoutine?.name, 'at', time, 'on', days);
+    if (selectedRoutine) {
+      // Save alarm to MongoDB and update the routine
+      const updatedRoutines = routines.map(r => {
+        if (r.id === selectedRoutine.id) {
+          return { ...r, alarm: { time, days } };
+        }
+        return r;
+      });
+      setRoutines(updatedRoutines);
+      localStorage.setItem('userRoutines', JSON.stringify(updatedRoutines));
+      console.log('Alarm saved for', selectedRoutine.name, 'at', time, 'on', days);
+    }
     setShowAlarmPopup(false);
   };
 
@@ -44,8 +54,12 @@ const UserRoutines: React.FC = () => {
     return Math.floor(Math.random() * 30); // Placeholder logic
   };
 
-  const handleRemoveRoutine = (routine: Routine) => {
-    const updatedRoutines = routines.filter(r => r.id !== routine.id);
+  const handleRemoveRoutine = (routineToRemove: Routine) => {
+    console.log('Removing routine:', routineToRemove);
+    const updatedRoutines = routines.filter(routine => 
+      routine._id !== routineToRemove._id
+    );
+    console.log('Updated routines:', updatedRoutines);
     setRoutines(updatedRoutines);
     localStorage.setItem('userRoutines', JSON.stringify(updatedRoutines));
   };
@@ -56,7 +70,7 @@ const UserRoutines: React.FC = () => {
         <h1>Your Routines</h1>
         <ul style={{ listStyleType: 'none', padding: 0 }}>
           {routines.map((routine, index) => (
-            <li key={routine.id} style={{ backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#d0ffd0', padding: '10px', marginBottom: '10px', borderRadius: '5px' }}>
+            <li key={routine._id} style={{ backgroundColor: index % 2 === 0 ? '#f0f0f0' : '#d0ffd0', padding: '10px', marginBottom: '10px', borderRadius: '5px' }}>
               <h3>{routine.name}</h3>
               <p>{routine.description}</p>
               <p>Days doing this routine: {calculateDaysDoingRoutine(routine)}</p>
