@@ -12,7 +12,6 @@ const UserRoutines: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch user's routines from local storage or backend
     const storedRoutines = JSON.parse(localStorage.getItem('userRoutines') || '[]');
     setRoutines(storedRoutines);
   }, []);
@@ -27,14 +26,23 @@ const UserRoutines: React.FC = () => {
     setShowVotePopup(true);
   };
 
+ const handleRemoveRoutine = (routineToRemove: Routine) => {
+    console.log('Removing routine:', routineToRemove);
+    const updatedRoutines = routines.filter(routine => 
+      routine._id !== routineToRemove._id
+    );
+    console.log('Updated routines:', updatedRoutines);
+    setRoutines(updatedRoutines);
+    localStorage.setItem('userRoutines', JSON.stringify(updatedRoutines));
+  };
+
   const handleSaveAlarm = (time: string, days: string[]) => {
     if (selectedRoutine) {
-      // Save alarm to MongoDB and update the routine
-      const updatedRoutines = routines.map(r => {
-        if (r.id === selectedRoutine.id) {
-          return { ...r, alarm: { time, days } };
+      const updatedRoutines = routines.map(routine => {
+        if (routine._id === selectedRoutine._id) {
+          return { ...routine, alarm: { time, days } };
         }
-        return r;
+        return routine;
       });
       setRoutines(updatedRoutines);
       localStorage.setItem('userRoutines', JSON.stringify(updatedRoutines));
@@ -44,24 +52,12 @@ const UserRoutines: React.FC = () => {
   };
 
   const handleSaveVote = (rating: number) => {
-    // Save vote to MongoDB
     console.log('Vote saved for', selectedRoutine?.name, 'with rating', rating);
     setShowVotePopup(false);
   };
 
   const calculateDaysDoingRoutine = (routine: Routine) => {
-    // Implement logic to calculate how many days the user has been doing the routine
-    return Math.floor(Math.random() * 30); // Placeholder logic
-  };
-
-  const handleRemoveRoutine = (routineToRemove: Routine) => {
-    console.log('Removing routine:', routineToRemove);
-    const updatedRoutines = routines.filter(routine => 
-      routine._id !== routineToRemove._id
-    );
-    console.log('Updated routines:', updatedRoutines);
-    setRoutines(updatedRoutines);
-    localStorage.setItem('userRoutines', JSON.stringify(updatedRoutines));
+    return Math.floor(Math.random() * 30);
   };
 
   return (
